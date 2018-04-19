@@ -85,12 +85,25 @@ public class Library
         int counter = 0;
         for (int i = 0; i < _noOfBooks; i++)
         {
-            if (_lib[i].getBorrowedDate() != null)
-            {
-                // If the date suits, add to the counter
-                if (_lib[i].getBorrowedDate().equals(d))
-                    counter++;
-            }
+                // Check if the book is borrowed
+                if (_lib[i].getBorrowed())
+                {
+                    // If the book was borrowed before or equals to the date d,
+                    // it means the book was borrowed at the date d
+                    if (_lib[i].getBorrowedDate().before(d) || _lib[i].getBorrowedDate().equals(d))
+                        counter++;
+                }
+                // If the book is not borrowed it may have been borrowed before
+                else if (_lib[i].getBorrowedDate() != null)
+                {
+                    // If the date d is between the borrow date and the return date it means the book
+                    // was borrowed at that date
+                    if ((_lib[i].getBorrowedDate().before(d)||_lib[i].getBorrowedDate().equals(d)) &&
+                            (_lib[i].getReturnDate().after(d)||_lib[i].getReturnDate().equals(d)))
+                    {
+                        counter++;
+                    }
+                }
         }
         return counter;
     }
