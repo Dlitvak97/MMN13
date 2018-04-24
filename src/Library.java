@@ -50,7 +50,7 @@ public class Library
     {
         for (int i = 0; i < _noOfBooks; i++)
         {
-            // loop until the book is not the book that is needed to remove,
+            // loop until the book is not the book that is needed to remove
             while (_lib[i].equals(b))
             {
                 // Remove the book
