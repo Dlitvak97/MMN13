@@ -15,6 +15,7 @@ public class Library
     //Constructor
 
     /**
+     * Constructs a new Library object. Initializes the number of books to 0 and allocates the array.
      *
      */
     public Library()
@@ -24,8 +25,10 @@ public class Library
     }
 
     /**
-     * @param b
-     * @return
+     * Gets a book and adds it to the library.
+     *
+     * @param b the book to add
+     * @return true if succeeded adding the book; false otherwise
      */
     public boolean addBook(Book b)
     {
@@ -39,7 +42,9 @@ public class Library
     }
 
     /**
-     * @param b
+     * Gets a book and removes all its occurrences in the library.
+     *
+     * @param b the book to remove
      */
     public void removeBook(Book b)
     {
@@ -60,6 +65,12 @@ public class Library
         }
     }
 
+    /**
+     * Gets a title of a book and removes the first occurrence of it in the library.
+     *
+     * @param title the title of the book to remove
+     * @return returns the removed book
+     */
     public Book remove(String title)
     {
         // Search for the book to remove
@@ -87,7 +98,9 @@ public class Library
     }
 
     /**
-     * @return
+     * Returns how many books in the library are borrowed.
+     *
+     * @return the number of borrowed books in the library
      */
     public int howManyBooksBorrowed()
     {
@@ -104,8 +117,10 @@ public class Library
     }
 
     /**
-     * @param name
-     * @return
+     * Gets a student name and returns how many books he is borrowing.
+     *
+     * @param name the name of the student
+     * @return the number of book the student is borrowing
      */
     public int howManyBooksBorrowedToStudent(String name)
     {
@@ -123,7 +138,9 @@ public class Library
     }
 
     /**
-     * @return
+     * Return the name of the author that has the most book in the library.
+     *
+     * @return the name of the author that has the most books in the library
      */
     public String mostPopularAuthor()
     {
@@ -163,7 +180,9 @@ public class Library
     }
 
     /**
-     * @return
+     * Returns the oldest book in the library.
+     *
+     * @return the oldest book in the library
      */
     public Book oldestBook()
     {
@@ -185,11 +204,13 @@ public class Library
                 oldestDate = _lib[i].getYear();
             }
         }
-        return _lib[oldestIndex];
+        return new Book(_lib[oldestIndex]);
     }
 
     /**
-     * @return
+     * Returns a string representation of this library.
+     *
+     * @return a string representation of this library
      */
     public String toString()
     {
