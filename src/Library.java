@@ -45,7 +45,8 @@ public class Library
     {
         for (int i = 0; i < _noOfBooks; i++)
         {
-            if (_lib[i].equals(b))
+            // loop until the book is not the book that is needed to remove,
+            while (_lib[i].equals(b))
             {
                 // Remove the book
                 _lib[i] = null;
@@ -57,6 +58,32 @@ public class Library
                 _noOfBooks--;
             }
         }
+    }
+
+    public Book remove(String title)
+    {
+        // Search for the book to remove
+        for (int i = 0; i < _noOfBooks; i++)
+        {
+            // If the book is found
+            if (_lib[i].getTitle().equals(title))
+            {
+                // keep the book in a variable to return it later
+                Book book=_lib[i];
+
+                // Remove the book
+                _lib[i] = null;
+
+                // Fix the hole
+                fixHole(i);
+
+                // Remove a book from the number of books
+                _noOfBooks--;
+
+                return book;
+            }
+        }
+        return null;
     }
 
     /**
@@ -72,38 +99,6 @@ public class Library
                 // If the book is borrowed add to the counter
                 counter++;
             }
-        }
-        return counter;
-    }
-
-    /**
-     * @param d
-     * @return
-     */
-    public int howManyBooksBorrowedAtDate(Date d)
-    {
-        int counter = 0;
-        for (int i = 0; i < _noOfBooks; i++)
-        {
-                // Check if the book is borrowed
-                if (_lib[i].getBorrowed())
-                {
-                    // If the book was borrowed before or equals to the date d,
-                    // it means the book was borrowed at the date d
-                    if (_lib[i].getBorrowedDate().before(d) || _lib[i].getBorrowedDate().equals(d))
-                        counter++;
-                }
-                // If the book is not borrowed it may have been borrowed before
-                else if (_lib[i].getBorrowedDate() != null)
-                {
-                    // If the date d is between the borrow date and the return date it means the book
-                    // was borrowed at that date
-                    if ((_lib[i].getBorrowedDate().before(d)||_lib[i].getBorrowedDate().equals(d)) &&
-                            (_lib[i].getReturnDate().after(d)||_lib[i].getReturnDate().equals(d)))
-                    {
-                        counter++;
-                    }
-                }
         }
         return counter;
     }
@@ -202,7 +197,7 @@ public class Library
 
         for (int i = 0; i < _noOfBooks; i++)
         {
-            s += "\n" + _lib[i].toString() + "\n";
+            s += _lib[i].toString() + "\n";
         }
         return s;
     }
@@ -210,10 +205,13 @@ public class Library
     // Fix a hole in the array in the specific index
     private void fixHole(int holeIndex)
     {
-        if (holeIndex == _noOfBooks - 1)
+        // If the hole is not in the last place it needs to be fixed
+        if (holeIndex != _noOfBooks - 1)
         {
+            // Put the last book in the hole
             _lib[holeIndex] = _lib[_noOfBooks - 1];
-            _lib[_noOfBooks] = null;
+            // remove the last reference
+            _lib[_noOfBooks - 1] = null;
         }
     }
 }
