@@ -32,6 +32,7 @@ public class Library
      */
     public boolean addBook(Book b)
     {
+        // If there is enough space in the library, add the book
         if (_noOfBooks < MAX_BOOKS)
         {
             _lib[_noOfBooks] = new Book(b);
@@ -56,7 +57,7 @@ public class Library
                 // Remove the book
                 _lib[i] = null;
 
-                // Fix the hole
+                // Fix the hole that may be created by removing a book
                 fixHole(i);
 
                 // Remove a book from the number of books
@@ -140,7 +141,7 @@ public class Library
     /**
      * Return the name of the author that has the most book in the library.
      *
-     * @return the name of the author that has the most books in the library
+     * @return the name of the author that has the most books in the library, if the library is empty return null
      */
     public String mostPopularAuthor()
     {
@@ -182,7 +183,7 @@ public class Library
     /**
      * Returns the oldest book in the library.
      *
-     * @return the oldest book in the library
+     * @return the oldest book in the library, if the library is empty return null
      */
     public Book oldestBook()
     {
