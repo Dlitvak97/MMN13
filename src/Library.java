@@ -4,6 +4,7 @@
  * Author: Daniel Litvak
  * Date: 8.4.2018
  */
+
 public class Library
 {
     private Book[] _lib;
@@ -16,7 +17,6 @@ public class Library
 
     /**
      * Constructs a new Library object. Initializes the number of books to 0 and allocates the array.
-     *
      */
     public Library()
     {
@@ -62,6 +62,10 @@ public class Library
 
                 // Remove a book from the number of books
                 _noOfBooks--;
+
+                // Check if this was the last book, if it was break the loop
+                if (_noOfBooks <= i)
+                    break;
             }
         }
     }
@@ -81,7 +85,7 @@ public class Library
             if (_lib[i].getTitle().equals(title))
             {
                 // keep the book in a variable to return it later
-                Book book=_lib[i];
+                Book book = _lib[i];
 
                 // Remove the book
                 _lib[i] = null;
